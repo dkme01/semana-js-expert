@@ -38,9 +38,12 @@ class VideoMediaPlayer {
   sourceOpenWrapper(mediaSource) {
     return async () => {
       this.sourceBuffer = mediaSource.addSourceBuffer(this.manifestJSON.codec);
+
       const selected = (this.selected = this.manifestJSON.intro);
+
       // evita rodar como LIVE
       mediaSource.duration = this.videoDuration;
+
       await this.fileDownload(selected.url);
     };
   }
