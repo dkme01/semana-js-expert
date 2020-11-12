@@ -6,11 +6,10 @@ class VideoMediaPlayer {
 
     this.videoElement = null;
     this.sourceBuffer = null;
-
     this.activeItem = {};
     this.selected = {};
-    this.selections = [];
     this.videoDuration = 0;
+    this.selections = [];
   }
 
   initializeCodec() {
@@ -32,7 +31,6 @@ class VideoMediaPlayer {
 
     const mediaSource = new MediaSource();
 
-    // @ts-ignore
     this.videoElement.src = URL.createObjectURL(mediaSource);
 
     mediaSource.addEventListener("sourceopen", this.sourceOpenWrapper(mediaSource));
@@ -76,7 +74,7 @@ class VideoMediaPlayer {
       hostTag: this.manifestJSON.hostTag,
     };
     const url = this.network.parseManifestURL(prepareUrl);
-    return this.network.getProperFileResolution(url);
+    return this.network.getProperResolution(url);
   }
 
   async nextChunk(data) {
@@ -133,7 +131,6 @@ class VideoMediaPlayer {
 
   async processBufferSegments(allSegments) {
     const sourceBuffer = this.sourceBuffer;
-
     sourceBuffer.appendBuffer(allSegments);
 
     return new Promise((resolve, reject) => {
@@ -145,7 +142,6 @@ class VideoMediaPlayer {
       };
 
       sourceBuffer.addEventListener("updateend", updateEnd);
-
       sourceBuffer.addEventListener("error", reject);
     });
   }

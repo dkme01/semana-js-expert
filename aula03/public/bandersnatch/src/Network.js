@@ -12,7 +12,7 @@ class Network {
     return response.arrayBuffer();
   }
 
-  async getProperFileResolution(url) {
+  async getProperResolution(url) {
     const startMs = Date.now();
     const response = await fetch(url);
     await response.arrayBuffer();
