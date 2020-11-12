@@ -136,7 +136,7 @@ class VideoMediaPlayer {
     return new Promise((resolve, reject) => {
       const updateEnd = (_) => {
         sourceBuffer.removeEventListener("updateend", updateEnd);
-        sourceBuffer.timeStampOffset = this.videoDuration;
+        sourceBuffer.timestampOffset = this.videoDuration;
 
         return resolve();
       };
